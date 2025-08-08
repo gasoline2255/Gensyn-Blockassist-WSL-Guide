@@ -140,7 +140,10 @@ export DISPLAY=192.168.1.10:0
 echo "export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0" >> ~/.bashrc
 source ~/.bashrc
 ```
-
+Now we need to check X server is running and the firewall allows connections.
+```bash 
+xeyes
+```
 
 
 
