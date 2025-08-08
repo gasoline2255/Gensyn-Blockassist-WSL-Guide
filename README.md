@@ -104,13 +104,42 @@ Verify Poetry is installed correctly:
 poetry --version
 ```
 
+### Configure VcXsrv to Accept Connections from WSL
 
+1. Find your Windows host IP: Open Windows Command Prompt (`Win + R`, then type `cmd`) and run:
 
+```bash
+ipconfig
+```
+Look for the **IPv4 Address** under your active network adapter (e.g., Wi-Fi or Ethernet). Example: `192.168.1.10`
 
+2. Launch VcXsrv on Windows:
 
+Start VcXsrv with these settings:
 
+- Select Multiple windows
 
+- Select Start no client
 
+- Check Disable access control (to allow connections)
+
+- Finish the setup and launch the server
+
+3. **Set the DISPLAY environment variable inside WSL:**
+
+Run this command in your WSL terminal, replacing `<WINDOWS_IP>` with your actual IPv4 address from step 1:
+```bash 
+export DISPLAY=<WINDOWS_IP>:0
+```
+Example:
+```bash 
+export DISPLAY=192.168.1.10:0
+```
+4. (Optional) To make this persistent, add it to your `~/.bashrc` or `~/.profile`:
+```bash 
+echo "export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0" >> ~/.bashrc
+source ~/.bashrc
+```
 
 
 
