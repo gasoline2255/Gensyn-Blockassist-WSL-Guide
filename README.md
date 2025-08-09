@@ -122,9 +122,17 @@ python run.py
 cd modal-login
 yarn dev
 ```
-**2** Open your browser a `http://localhost:3000` and log in to Gensyn.
+**3** Open your browser a `http://localhost:3000` and log in to Gensyn. 
 
-**4** Now it will ask Hugging Face token: ` Paste your token`
+**after login enter cntrl+ c on your terminal and enter `cd`**
+
+**4** again run BlockAssist:
+```bash
+cd blockassist
+python run.py
+```
+
+**5** Now it will ask Hugging Face token: ` Paste your token`
 
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/60414bc20fe061df0f35536dd29fc85d0459e285/Screenshot%202025-08-09%20044704.png)
 
