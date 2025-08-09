@@ -22,11 +22,7 @@ This guide helps you set up and run **Gensyn Minecraft BlockAssist** within a Wi
 
 ---
 
-1. Open **Command Prompt (CMD)**:  
-   Press `Win + R`, type `cmd`, and hit Enter.  
-2. Run:
-
-## Step 3: Clone and Setup BlockAssist in WSL
+## Step 2: Clone and Setup BlockAssist in WSL
 
 Open your WSL terminal and run these commands **one by one**:
 
@@ -61,7 +57,7 @@ pyenv global 3.10.0
 # Install required Python packages
 pip install psutil readchar
 ```
-## Step 4: (Optional) Install and Configure cuDNN for Nvidia GPU Support
+## Step 3: (Optional) Install and Configure cuDNN for Nvidia GPU Support
 ```bash
 wget https://developer.download.nvidia.com/compute/cudnn/9.11.0/local_installers/cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
 sudo dpkg -i cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
@@ -74,14 +70,14 @@ sudo apt install -y libcudnn9 libcudnn9-dev
 echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
-## Step 5: Install Poetry (Python Dependency Manager)
+## Step 4: Install Poetry (Python Dependency Manager)
 ```bash
 curl -sSL https://install.python-poetry.org | python3 -
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 poetry --version
 ```
-## Step 6: Configure VcXsrv to Accept Connections from WSL
+## Step 5: Configure VcXsrv to Accept Connections from WSL
 **1.** Open Command Prompt (CMD) and run:
 ```bash
 ipconfig
@@ -115,7 +111,7 @@ xeyes
 **Now a xeyes window pop up. and you can close that window `cntrl +c`**
 
 
-## Step 7: Login to Gensyn Modal and Run BlockAssist
+## Step 6: Login to Gensyn Modal and Run BlockAssist
 **1** Bypass Gensyn login for local development:
 ```bash
 cd modal-login
