@@ -22,10 +22,6 @@ This guide helps you set up and run **Gensyn Minecraft BlockAssist** within a Wi
 
 ---
 
-## Step 2: Find Your Windows Host IP Address
-
-To enable graphical apps in WSL to display correctly, you need your Windows host IP.
-
 1. Open **Command Prompt (CMD)**:  
    Press `Win + R`, type `cmd`, and hit Enter.  
 2. Run:
