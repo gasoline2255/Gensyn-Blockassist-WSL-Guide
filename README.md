@@ -83,7 +83,7 @@ poetry --version
 ```bash
 ipconfig
 ```
-**2** Find your **Ethernet adapter vEthernet (WSL (Hyper-V firewall))**: eg `IPv4 Address. . . . . . . . . . . : 192.168.1.10`
+**2** Find your **IPv4 Address from Ethernet adapter Ethernet:**: eg `IPv4 Address. . . . . . . . . . . : 192.168.1.10`
 
 **3** Launch VcXsrv on Windows with these settings:
 - Select Multiple windows
@@ -113,16 +113,17 @@ xeyes
 
 
 ## Step 6: Login to Gensyn Modal and Run BlockAssist
-**1** Bypass Gensyn login for local development:
+**1** Run BlockAssist:
+```bash
+python run.py
+```
+**2** Bypass Gensyn login for local development: ( if you got error after running `python run.py`
 ```bash
 cd modal-login
 yarn dev
 ```
 **2** Open your browser a `http://localhost:3000` and log in to Gensyn.
-**3** Run BlockAssist:
-```bash
-python run.py
-```
+
 **4** Now it will ask Hugging Face token: ` Paste your token`
 
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/60414bc20fe061df0f35536dd29fc85d0459e285/Screenshot%202025-08-09%20044704.png)
