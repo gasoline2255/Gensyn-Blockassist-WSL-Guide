@@ -1,76 +1,71 @@
-## Gensyn Minecraft BlockAssist on WSL
-This guide helps you set up and run Gensyn Minecraft BlockAssist within a WSL environment.
+# Gensyn Minecraft BlockAssist on WSL
+
+This guide helps you set up and run **Gensyn Minecraft BlockAssist** within a Windows Subsystem for Linux (WSL) environment.
+
+---
 
 ## Prerequisites
-- Windows 10/11 with WSL 2 installed
 
-- Ubuntu (or your preferred Linux distro) installed in WSL
+- Windows 10/11 with WSL 2 installed  
+- Ubuntu (or your preferred Linux distro) installed in WSL  
+- Python 3.10+ installed  
+- Git installed  
+- VcXsrv or another X server for Windows installed and running  
+- Poetry for Python dependency management  
 
-- Python 3.10+ installed
+---
 
-- Git installed
+## Step 1: Install VcXsrv (X Server for Windows)
 
-- VcXsrv or other X server for Windows installed and running
+1. Download VcXsrv from [Link To download VcXsrv](https://sourceforge.net/projects/vcxsrv/)  
+2. Run the installer and complete the installation  
 
-- poetry for Python dependency management
+---
 
-## Setup Steps
-1. Download and Install VcXsrv
-https://sourceforge.net/projects/vcxsrv/
-Download the installer from VcXsrv on SourceForge
+## Step 2: Find Your Windows Host IP Address
 
-2. Run the installer and complete the installation
+To enable graphical apps in WSL to display correctly, you need your Windows host IP.
 
-## Step: Find Your Windows Host IP Address
-To enable graphical apps in WSL to display properly (for example, when using an X server like VcXsrv), you need your Windows host IP address.
-1. Open Command Prompt `(CMD)` on your Windows machine:
+1. Open **Command Prompt (CMD)**:  
+   Press `Win + R`, type `cmd`, and hit Enter.  
+2. Run:
 
-`Press Win + R, type cmd, and press Enter.`
+## Step 3: Clone and Setup BlockAssist in WSL
 
-2. Run the following command: `ipconfig`
+Open your WSL terminal and run these commands **one by one**:
 
-3. Look for the section named Ethernet adapter or Wi-Fi (depending on your connection).
-
-4. Find the IPv4 Address. It will look something like: ` IPv4 Address. . . . . . . . . . . : 192.168.1.10`
-
-## Run These Commands One by One in Your WSL Terminal
-
-Run these commands **one by one** inside your WSL terminal:
-
-1. ### Clone the repo and enter its directory:
-   ```bash
-   git clone https://github.com/gensyn-ai/blockassist.git
-   cd blockassist
-2. ### Run the setup script: 
 ```bash
+# Clone the repository and enter its folder
+git clone https://github.com/gensyn-ai/blockassist.git
+cd blockassist
+
+# Run the setup script
 ./setup.sh
-```
-3. ### Install Pyenv:
-```bash
+
+# Install pyenv
 curl -fsSL https://pyenv.run | bash
-```
-4. ### Configure Pyenv environment variables:
-```bash
+
+# Configure pyenv environment variables
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - bash)"
 eval "$(pyenv virtualenv-init -)"
-```
-5. ### Reload your shell:
-```bash
+
+# Reload your shell environment
 source ~/.bashrc
-```
-6. ### Update system and install dependencies (enter `y` if prompted):
-```bash
+
+# Update system and install dependencies (enter 'y' if prompted)
 sudo apt update
-sudo apt install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl git libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-pyenv install 3.10
-```
-7. ### Install Python packages:
-```bash 
+sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl git libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+# Install Python 3.10 using pyenv and set it globally
+pyenv install 3.10.0
+pyenv global 3.10.0
+
+# Install required Python packages
 pip install psutil readchar
 ```
-8. ### Update cuDNN (for Nvidia GPU support):
+## Step 4: (Optional) Install and Configure cuDNN for Nvidia GPU Support
 ```bash
 wget https://developer.download.nvidia.com/compute/cudnn/9.11.0/local_installers/cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
 sudo dpkg -i cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
@@ -78,88 +73,59 @@ sudo cp /var/cudnn-local-repo-ubuntu2204-9.11.0/cudnn-local-4EC753EA-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/cudnn-local-4EC753EA-keyring.gpg] file:///var/cudnn-local-repo-ubuntu2204-9.11.0 /" | sudo tee /etc/apt/sources.list.d/cudnn-local.list
 sudo apt update
 sudo apt install -y libcudnn9 libcudnn9-dev
-```
-9. ### Add CUDA libraries to your path and reload:
-```bash
+
+# Add CUDA libraries to your path and reload
 echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
-10. ### Install Poetry (Python Dependency Manager)
-
-Run the following command to install Poetry globally:
-
+## Step 5: Install Poetry (Python Dependency Manager)
 ```bash
 curl -sSL https://install.python-poetry.org | python3 -
-```
-After installation, add Poetry to your PATH by adding this to your shell config (`~/.bashrc` or `~/.zshrc`):
-```bash
-export PATH="$HOME/.local/bin:$PATH"
-```
-Then reload your shell:
-```bash
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
-```
-Verify Poetry is installed correctly:
-```bash
 poetry --version
 ```
-
-### Configure VcXsrv to Accept Connections from WSL
-
-1. Find your Windows host IP: Open Windows Command Prompt (`Win + R`, then type `cmd`) and run:
-
+## Step 6: Configure VcXsrv to Accept Connections from WSL
+**1.** Open Command Prompt (CMD) and run:
 ```bash
 ipconfig
 ```
-Look for the **IPv4 Address** under your active network adapter (e.g., Wi-Fi or Ethernet). Example: `192.168.1.10`
+**2** Find your **Ethernet adapter vEthernet (WSL (Hyper-V firewall))**: 
+eg `IPv4 Address. . . . . . . . . . . : 192.168.1.10`
 
-2. Launch VcXsrv on Windows:
-
-Start VcXsrv with these settings:
-
+**3** Launch VcXsrv on Windows with these settings:
 - Select Multiple windows
 
 - Select Start no client
 
-- Check Disable access control (to allow connections)
+- Check Disable access control
 
-- Finish the setup and launch the server
+- Finish and launch the server
 
-3. **Set the DISPLAY environment variable inside WSL:**
-
-Run this command in your WSL terminal, replacing `<WINDOWS_IP>` with your actual IPv4 address from step 1:
-```bash 
+**4** In your WSL terminal, set the DISPLAY environment variable (replace `<IPV4 Address>`)
+```bash
 export DISPLAY=<WINDOWS_IP>:0
 ```
-Example:
-```bash 
-export DISPLAY=192.168.1.10:0
-```
-4. (Optional) To make this persistent, add it to your `~/.bashrc` or `~/.profile`:
-```bash 
+**Example:** `export DISPLAY=192.168.1.10:0`
+
+**5** o make DISPLAY persistent, run:
+```bash
 echo "export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0" >> ~/.bashrc
 source ~/.bashrc
 ```
-Now we need to check X server is running and the firewall allows connections.
-```bash 
+**6** Test X server connection:
+```bash
 xeyes
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Step 7: Login to Gensyn Modal and Run BlockAssist
+**1** Bypass Gensyn login for local development:
+```bash
+cd modal-login
+yarn dev
+```
+**2** Open your browser a `http://localhost:3000` and log in to Gensyn.
+**3** Run BlockAssist:
+```bash
+python run.py
+```
