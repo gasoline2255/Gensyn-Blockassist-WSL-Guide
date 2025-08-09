@@ -100,12 +100,7 @@ export DISPLAY=<WINDOWS_IP>:0
 ```
 **Example:** `export DISPLAY=192.168.1.10:0`
 
-**5** Make DISPLAY persistent, run:
-```bash
-echo "export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0" >> ~/.bashrc
-source ~/.bashrc
-```
-**6** Test X server connection:
+**5** Test X server connection:
 ```bash
 xeyes
 ```
