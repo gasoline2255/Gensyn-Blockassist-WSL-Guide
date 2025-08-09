@@ -19,8 +19,8 @@ This guide helps you set up and run **Gensyn Minecraft BlockAssist** within a Wi
 
 1. Download VcXsrv from [Download VcXsrv](https://sourceforge.net/projects/vcxsrv/)  
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/d418a853957c0205d967b244e878cce093e85ee2/Screenshot%202025-08-09%20051036.png)
+
 2. Run the installer and complete the installation 
-![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/b4ea962484b95376932970fd61af4d96e7764985/Screenshot%202025-08-09%20044107.png)
 ---
 
 ## Step 2: Clone and Setup BlockAssist in WSL
