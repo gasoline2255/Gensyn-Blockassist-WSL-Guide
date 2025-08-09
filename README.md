@@ -122,3 +122,6 @@ yarn dev
 ```bash
 python run.py
 ```
+**4** Now it will ask Hugging Face token: ` Paste your token`
+
+**5** And soon your minecraft game wil open in VcXsrv
