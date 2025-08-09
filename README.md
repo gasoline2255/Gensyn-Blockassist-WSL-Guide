@@ -1,24 +1,24 @@
-# Gensyn Minecraft BlockAssist on WSL
+# 🎮 Gensyn Minecraft BlockAssist on WSL 🛠️
 
 This guide helps you set up and run **Gensyn Minecraft BlockAssist** within a Windows Subsystem for Linux (WSL) environment.
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
-- Windows 10/11 with WSL 2 installed  
-- Ubuntu (or your preferred Linux distro) installed in WSL  
-- Python 3.10+ installed  
-- Git installed  
-- VcXsrv or another X server for Windows installed and running  
-- Poetry for Python dependency management  
+- 🖥️ Windows 10/11 with WSL 2 installed  
+- 🐧 Ubuntu (or your preferred Linux distro) installed in WSL  
+- 🐍 Python 3.10+ installed  
+- 🔧 Git installed  
+- 🖼️ VcXsrv or another X server for Windows installed and running  
+- 📦 Poetry for Python dependency management  
 
 ---
 
-## Step 1: Install VcXsrv (X Server for Windows)
+## Step 1: Install VcXsrv (X Server for Windows) 🖥️
 
-1. Download VcXsrv from [Link To download VcXsrv](https://sourceforge.net/projects/vcxsrv/)  
-2. Run the installer and complete the installation  
+1. Download VcXsrv from [Download VcXsrv](https://sourceforge.net/projects/vcxsrv/)  
+2. Run the installer and complete the installation 
 
 ---
 
@@ -90,8 +90,7 @@ poetry --version
 ```bash
 ipconfig
 ```
-**2** Find your **Ethernet adapter vEthernet (WSL (Hyper-V firewall))**: 
-eg `IPv4 Address. . . . . . . . . . . : 192.168.1.10`
+**2** Find your **Ethernet adapter vEthernet (WSL (Hyper-V firewall))**: eg `IPv4 Address. . . . . . . . . . . : 192.168.1.10`
 
 **3** Launch VcXsrv on Windows with these settings:
 - Select Multiple windows
@@ -108,7 +107,7 @@ export DISPLAY=<WINDOWS_IP>:0
 ```
 **Example:** `export DISPLAY=192.168.1.10:0`
 
-**5** o make DISPLAY persistent, run:
+**5** Make DISPLAY persistent, run:
 ```bash
 echo "export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0" >> ~/.bashrc
 source ~/.bashrc
@@ -117,6 +116,8 @@ source ~/.bashrc
 ```bash
 xeyes
 ```
+**Now a xeyes window pop up. and you can close that window `cntrl +c`**
+
 
 ## Step 7: Login to Gensyn Modal and Run BlockAssist
 **1** Bypass Gensyn login for local development:
