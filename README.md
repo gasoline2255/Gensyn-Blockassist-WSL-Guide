@@ -58,6 +58,30 @@ pyenv global 3.10.0
 # Install required Python packages
 pip install psutil readchar
 ```
+
+## Step 2.5: Activate Environment & Install BlockAssist Locally (Malmo Fix) 🛠️
+```bash
+# 1) Activate the same venv
+source blockassist-venv/bin/activate
+
+# 2) Make sure build tools are fine
+python -m pip install --upgrade pip setuptools wheel
+
+# 3) Install the repo in editable mode so Python can import its packages (including `malmo`)
+pip install -e .
+
+# (Alternative to step 3 if you prefer not to install:)
+# export PYTHONPATH="$PWD/src:$PYTHONPATH"
+# echo 'export PYTHONPATH="$HOME/blockassist/src:$PYTHONPATH"' >> ~/.bashrc
+# source ~/.bashrc
+
+# 4) Sanity check: do we have the package?
+python - <<'PY'
+import pkgutil, sys
+print('malmo' in [m.name for m in pkgutil.iter_modules()], 'PYTHONPATH=', sys.path[:3])
+PY
+```
+
 ## Step 3: (Optional) Install and Configure cuDNN for Nvidia GPU Support
 ```bash
 wget https://developer.download.nvidia.com/compute/cudnn/9.11.0/local_installers/cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
