@@ -49,7 +49,8 @@ source ~/.bashrc
 
 # Update system and install dependencies (enter 'y' if prompted)
 sudo apt update
-sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl git libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
+curl git libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # Install Python 3.10 using pyenv and set it globally
 pyenv install 3.10.0
@@ -57,29 +58,6 @@ pyenv global 3.10.0
 
 # Install required Python packages
 pip install psutil readchar
-```
-
-## Step 2.5: Activate Environment & Install BlockAssist Locally (Malmo Fix) 🛠️
-```bash
-# 1) Activate the same venv
-source blockassist-venv/bin/activate
-
-# 2) Make sure build tools are fine
-python -m pip install --upgrade pip setuptools wheel
-
-# 3) Install the repo in editable mode so Python can import its packages (including `malmo`)
-pip install -e .
-
-# (Alternative to step 3 if you prefer not to install:)
-# export PYTHONPATH="$PWD/src:$PYTHONPATH"
-# echo 'export PYTHONPATH="$HOME/blockassist/src:$PYTHONPATH"' >> ~/.bashrc
-# source ~/.bashrc
-
-# 4) Sanity check: do we have the package?
-python - <<'PY'
-import pkgutil, sys
-print('malmo' in [m.name for m in pkgutil.iter_modules()], 'PYTHONPATH=', sys.path[:3])
-PY
 ```
 
 ## Step 3: (Optional) Install and Configure cuDNN for Nvidia GPU Support
@@ -103,33 +81,51 @@ source ~/.bashrc
 poetry --version
 ```
 ## Step 5: Configure VcXsrv to Accept Connections from WSL
-**1.** Open Command Prompt (CMD) and run:
+**1.** Open CMD or PowerShell:
 ```bash
 ipconfig
 ```
-**2** Find your **IPv4 Address from Ethernet adapter Ethernet:**: eg `IPv4 Address. . . . . . . . . . . : 192.168.1.10`
+Find your IPv4 Address `(e.g., 192.168.1.10)`.
 
-**3** Launch VcXsrv on Windows with these settings:
-- Select Multiple windows
+**2.** Launch VcXsrv with:
 
-- Select Start no client
+✅ Multi-window
 
-- Check Disable access control
+✅ Start no client
 
-- Finish and launch the server
+✅ Disable access control
 
-**4** In your WSL terminal, set the DISPLAY environment variable (replace `<IPV4 Address>`)
+❌ Uncheck “Native OpenGL”
+
+**3.**
 ```bash
+In WSL:
+# Install X11 tools
+sudo apt-get update -y
+sudo apt-get install -y x11-apps x11-xserver-utils
+
+# Set DISPLAY to your Windows IP
 export DISPLAY=<WINDOWS_IP>:0
-```
-**Example:** `export DISPLAY=192.168.1.10:0`
+# Example: export DISPLAY=192.168.1.10:0
 
-**5** Test X server connection:
-```bash
+# Test basic X11
 xeyes
-```
-**Now a xeyes window pop up. and you can close that window `cntrl +c`**
 
+# Check screen modes
+xrandr -q
+```
+**4.** Fix OpenGL issues (software rendering):
+```bash
+
+# Force Mesa software GL
+export LIBGL_ALWAYS_SOFTWARE=1
+export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
+export LIBGL_ALWAYS_INDIRECT=1
+export MESA_GL_VERSION_OVERRIDE=2.1
+
+# Allow LWJGL 2 to use software OpenGL
+export _JAVA_OPTIONS='-Xms512m -Xmx2g -Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true'
+```
 
 ## Step 6: Login to Gensyn Modal and Run BlockAssist
 **1** Run BlockAssist:
@@ -141,14 +137,41 @@ python run.py
 cd modal-login
 yarn dev
 ```
+**4** : Activate Environment & Install BlockAssist Locally (Malmo Fix) 🛠️
+```bash
+# 1) Activate the same venv
+source blockassist-venv/bin/activate
+
+# 2) Make sure build tools are fine
+python -m pip install --upgrade pip setuptools wheel
+
+# 3) Install the repo in editable mode so Python can import its packages (including `malmo`)
+pip install -e .
+
+# Check if malmo is available
+python - <<'PY'
+import pkgutil, sys
+print('malmo' in [m.name for m in pkgutil.iter_modules()], 'PYTHONPATH=', sys.path[:3])
+PY
+#Run these commands inside your WSL Ubuntu:
+sudo apt update
+sudo apt install -y zip unzip
+
+#Then check if it works:
+which zip
+zip -v
+
+```
+
 **3** Open your browser a `http://localhost:3000` and log in to Gensyn. 
 
 **after login enter cntrl+ c on your terminal and enter `cd`**
 
 **4** again run BlockAssist:
 ```bash
-cd blockassist
-python run.py
+cd ~/blockassist
+source blockassist-venv/bin/activate
+python3 run.py
 ```
 
 **5** Now it will ask Hugging Face token: ` Paste your token`
