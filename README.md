@@ -1,6 +1,8 @@
-# 🎮 Gensyn Minecraft BlockAssist on WSL 🛠️
+# 🎮 Gensyn Minecraft BlockAssist v0.1.0 on WSL ��️
 
-This guide helps you set up and run **Gensyn Minecraft BlockAssist** within a Windows Subsystem for Linux (WSL) environment.
+**BlockAssist v0.1.0 has been released with important fixes, including a HuggingFace update that all users need to apply.**
+
+⚡️ **Action Required:** Please wipe & reclone BlockAssist, then follow the official guide below.
 
 ---
 
@@ -10,17 +12,19 @@ This guide helps you set up and run **Gensyn Minecraft BlockAssist** within a Wi
 - 🐧 Ubuntu (or your preferred Linux distro) installed in WSL  
 - 🐍 Python 3.10+ installed  
 - 🔧 Git installed  
-- 🖼️ VcXsrv or another X server for Windows installed and running  
+- ��️ VcXsrv or another X server for Windows installed and running  
 - 📦 Poetry for Python dependency management  
+- 🟢 Node.js and Yarn for the login interface
 
 ---
 
-## Step 1: Install VcXsrv (X Server for Windows) 🖥️
+## Step 1: Install VcXsrv (X Server for Windows) ��️
 
 1. Download VcXsrv from [Download VcXsrv](https://sourceforge.net/projects/vcxsrv/)  
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/d418a853957c0205d967b244e878cce093e85ee2/Screenshot%202025-08-09%20051036.png)
 
 2. Run the installer and complete the installation 
+
 ---
 
 ## Step 2: Clone and Setup BlockAssist in WSL
@@ -28,6 +32,9 @@ This guide helps you set up and run **Gensyn Minecraft BlockAssist** within a Wi
 Open your WSL terminal and run these commands **one by one**:
 
 ```bash
+# Remove old installation (if exists)
+rm -rf ~/blockassist
+
 # Clone the repository and enter its folder
 git clone https://github.com/gensyn-ai/blockassist.git
 cd blockassist
@@ -60,7 +67,30 @@ pyenv global 3.10.0
 pip install psutil readchar
 ```
 
-## Step 3: (Optional) Install and Configure cuDNN for Nvidia GPU Support
+## Step 3: Install Node.js and Yarn
+
+```bash
+# Install Node.js via nvm (Node Version Manager)
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+# Install latest LTS Node.js and set as default
+nvm install --lts
+nvm alias default 'lts/*'
+nvm use default
+
+# Enable Corepack and install Yarn
+corepack enable
+corepack prepare yarn@stable --activate
+
+# Verify installations
+node -v
+npm -v
+yarn -v
+```
+
+## Step 4: (Optional) Install and Configure cuDNN for Nvidia GPU Support
 ```bash
 wget https://developer.download.nvidia.com/compute/cudnn/9.11.0/local_installers/cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
 sudo dpkg -i cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
@@ -73,14 +103,22 @@ sudo apt install -y libcudnn9 libcudnn9-dev
 echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
-## Step 4: Install Poetry (Python Dependency Manager)
+
+## Step 5: Install Poetry (Python Dependency Manager)
 ```bash
 curl -sSL https://install.python-poetry.org | python3 -
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 poetry --version
 ```
-## Step 5: Configure VcXsrv to Accept Connections from WSL
+
+## Step 6: Install psutil, readchar, and rich
+
+```bash
+pip install psutil readchar rich
+```
+
+## Step 7: Configure VcXsrv to Accept Connections from WSL
 **1.** Open CMD or PowerShell:
 ```bash
 ipconfig
@@ -95,7 +133,7 @@ Find your IPv4 Address `(e.g., 192.168.1.10)`.
 
 ✅ Disable access control
 
-❌ Uncheck “Native OpenGL”
+❌ Uncheck "Native OpenGL"
 
 **3.**
 ```bash
@@ -114,9 +152,9 @@ xeyes
 # Check screen modes
 xrandr -q
 ```
+
 **4.** Fix OpenGL issues (software rendering):
 ```bash
-
 # Force Mesa software GL
 export LIBGL_ALWAYS_SOFTWARE=1
 export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
@@ -127,17 +165,23 @@ export MESA_GL_VERSION_OVERRIDE=2.1
 export _JAVA_OPTIONS='-Xms512m -Xmx2g -Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true'
 ```
 
-## Step 6: Login to Gensyn Modal and Run BlockAssist
-**1** Run BlockAssist:
-```bash
-python run.py
-```
-**2** Bypass Gensyn login for local development: ( if you got error after running `python run.py`
+## Step 8: Login to Gensyn Modal and Run BlockAssist
+
+**1** First, go to the modal-login directory and start the login server:
 ```bash
 cd modal-login
+yarn install
 yarn dev
 ```
-**4** : Activate Environment & Install BlockAssist Locally (Malmo Fix) 🛠️
+
+**2** Open your browser at `http://localhost:3000` and log in to Gensyn. 
+
+**After login enter Ctrl+C on your terminal and run:**
+```bash
+cd blockassist
+```
+
+**3** Activate Environment & Install BlockAssist Locally (Malmo Fix) 🛠️
 ```bash
 # 1) Activate the same venv
 source blockassist-venv/bin/activate
@@ -153,60 +197,23 @@ python - <<'PY'
 import pkgutil, sys
 print('malmo' in [m.name for m in pkgutil.iter_modules()], 'PYTHONPATH=', sys.path[:3])
 PY
-#Run these commands inside your WSL Ubuntu:
+
+# Run these commands inside your WSL Ubuntu:
 sudo apt update
 sudo apt install -y zip unzip
 
-#Then check if it works:
+# Then check if it works:
 which zip
 zip -v
-
 ```
 
-**3** Open your browser a `http://localhost:3000` and log in to Gensyn. 
-
-**after login enter cntrl+ c on your terminal and enter `cd`**
-
-**4** again run BlockAssist:
+**4** Now run BlockAssist:
 ```bash
-cd ~/blockassist
-source blockassist-venv/bin/activate
 python3 run.py
 ```
 
-**5** Now it will ask Hugging Face token: ` Paste your token`
+**5** Now it will ask for Hugging Face token: `Paste your token`
 
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/60414bc20fe061df0f35536dd29fc85d0459e285/Screenshot%202025-08-09%20044704.png)
 
-**6** And soon your minecraft game wil open in VcXsrv
-
-## ⚠️ IMPORTANT: BlockAssist v0.1.0 Update Required
-
-## For Existing Users - Quick Update
-
-Since you already have the prerequisites installed, you only need to:
-
-1. **Update BlockAssist:**
-   ```bash
-   rm -rf ~/blockassist ~/blockassist-venv
-   git clone https://github.com/gensyn-ai/blockassist.git
-   cd blockassist
-   ```
-
-2. **Install Rich library:**
-   ```bash
-   pip install rich
-   ```
-
-3. **Run setup:**
-   ```bash
-   ./setup.sh
-   pip install -e .
-   ```
-
-4. **Run BlockAssist:**
-   ```bash
-   python run.py
-   ```
-
-That's it! All your existing WSL, VcXsrv, and system configurations remain the same.
+**6** And soon your Minecraft game will open in VcXsrv
