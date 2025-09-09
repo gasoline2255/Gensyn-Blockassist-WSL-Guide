@@ -179,3 +179,34 @@ python3 run.py
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/60414bc20fe061df0f35536dd29fc85d0459e285/Screenshot%202025-08-09%20044704.png)
 
 **5** And soon your minecraft game wil open in VcXsrv
+
+## ⚠️ IMPORTANT: BlockAssist v0.1.0 Update Required
+
+## For Existing Users - Quick Update
+
+Since you already have the prerequisites installed, you only need to:
+
+1. **Update BlockAssist:**
+   ```bash
+   rm -rf ~/blockassist ~/blockassist-venv
+   git clone https://github.com/gensyn-ai/blockassist.git
+   cd blockassist
+   ```
+
+2. **Install Rich library:**
+   ```bash
+   pip install rich
+   ```
+
+3. **Run setup:**
+   ```bash
+   ./setup.sh
+   pip install -e .
+   ```
+
+4. **Run BlockAssist:**
+   ```bash
+   python run.py
+   ```
+
+That's it! All your existing WSL, VcXsrv, and system configurations remain the same.
