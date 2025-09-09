@@ -178,7 +178,7 @@ python3 run.py
 
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/60414bc20fe061df0f35536dd29fc85d0459e285/Screenshot%202025-08-09%20044704.png)
 
-**5** And soon your minecraft game wil open in VcXsrv
+**6** And soon your minecraft game wil open in VcXsrv
 
 ## ⚠️ IMPORTANT: BlockAssist v0.1.0 Update Required
 
