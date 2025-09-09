@@ -217,3 +217,35 @@ python3 run.py
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/main/Screenshot%202025-09-09%20232659.png)
 
 **6** And soon your Minecraft game will open in VcXsrv
+
+## 🚀 How To Start BlockAssist the Next Day
+
+Follow these steps whenever you want to restart BlockAssist after shutdown:
+
+```bash
+cd blockassist
+
+# Configure pyenv environment variables
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+eval "$(pyenv virtualenv-init -)"
+```
+##Launch VcXsrv on Windows with:
+```bash
+✅ Multi-window
+✅ Start no client
+✅ Disable access control
+```
+Set DISPLAY to your Windows IP
+```bash
+export DISPLAY=<WINDOWS_IP>:0 
+```
+ Test X11 forwarding (a small "eyes" window should appear, then close it)
+```bash
+xeyes
+```
+Now run BlockAssist:
+```bash
+python3 run.py
+```
