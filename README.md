@@ -214,6 +214,6 @@ python3 run.py
 
 **5** Now it will ask for Hugging Face token: `Paste your token`
 
-![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/60414bc20fe061df0f35536dd29fc85d0459e285/Screenshot%202025-08-09%20044704.png)
+![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/main/Screenshot%202025-09-09%20232659.png)
 
 **6** And soon your Minecraft game will open in VcXsrv
