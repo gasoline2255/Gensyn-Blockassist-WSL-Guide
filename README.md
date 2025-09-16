@@ -247,5 +247,6 @@ xeyes
 ```
 Now run BlockAssist:
 ```bash
+source blockassist-venv/bin/activate
 python3 run.py
 ```
