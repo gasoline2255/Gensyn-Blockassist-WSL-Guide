@@ -184,7 +184,7 @@ cd blockassist
 **3** Activate Environment & Install BlockAssist Locally (Malmo Fix) 🛠️
 ```bash
 # 1) Activate the same venv
-python3 -m venv .venv
+python3 -m venv blockassist-venv
 source blockassist-venv/bin/activate
 
 # 2) Make sure build tools are fine
