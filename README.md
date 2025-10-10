@@ -20,7 +20,7 @@
 
 ## 🛠️ Installation Steps
 
-## Step 1: Install VcXsrv (X Server for Windows) ��️
+## Step 1: Install VcXsrv (X Server for Windows) 
 
 1. Download VcXsrv from [Download VcXsrv](https://sourceforge.net/projects/vcxsrv/)  
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/d418a853957c0205d967b244e878cce093e85ee2/Screenshot%202025-08-09%20051036.png)
