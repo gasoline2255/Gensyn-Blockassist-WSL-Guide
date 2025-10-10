@@ -18,7 +18,7 @@
 
 ---
 
-## 📦 Installation Steps
+## 🛠️ Installation Steps
 
 ## Step 1: Install VcXsrv (X Server for Windows) ��️
 
@@ -29,30 +29,30 @@
 
 ---
 
-## Step 2: Clone and Setup BlockAssist in WSL
+## 🧱 Step 2: Clone and Setup BlockAssist in WSL
 
 Open your WSL terminal and run these commands **one by one**:
 
 ```bash
-# Remove old installation (if exists)
+# 🧹 Remove old installation (if exists)
 rm -rf ~/blockassist
 ```
 
-# Clone the repository and enter its folder
+# 📦 Clone the repository and enter its folder
 ```
 git clone https://github.com/gensyn-ai/blockassist.git
 cd blockassist
 ```
-# Install Core Dependencies
+# 🛠️ Install Core Dependencies
 Install Java
 ```
 ./setup.sh
 ```
-# Install and configure pyenv
+# 🐍 Install and configure pyenv
 ```
 curl -fsSL https://pyenv.run | bash
 ```
-# Configure pyenv environment variables
+#  ⚙️ Configure pyenv environment variables
 ```
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -60,37 +60,37 @@ eval "$(pyenv init - bash)"
 eval "$(pyenv virtualenv-init -)"
 ```
 
-# Reload your shell environment
+# 🔁 Reload your shell environment
 ```
 source ~/.bashrc
 ```
 
-# Update system and install dependencies (enter 'y' if prompted)
+# 🧩 Update system and install dependencies (enter 'y' if prompted)
 ```
 sudo apt update
 sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
 curl git libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 ```
 
-# Install Python 3.10 using pyenv and set it globally
+# 🐍 Install Python 3.10 using pyenv and set it globally
 ```
 pyenv install 3.10.0
 pyenv global 3.10.0
 ```
 
-# Install required Python packages
+# 📚 Install required Python packages
 ```
 pip install psutil readchar
 ```
 
-## Step 3: Install Node.js and Yarn
+## ⚡ Step 3: Install Node.js and Yarn
 
 
-# Install Node.js via nvm (Node Version Manager)
+# 📥 Install Node.js via nvm (Node Version Manager)
 ```
 curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
-# Install latest LTS Node.js and set as default
+# ⚙️ Install latest LTS Node.js and set as default
 ```
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
@@ -98,19 +98,19 @@ nvm install --lts
 nvm alias default 'lts/*'
 nvm use default
 ```
-# Enable Corepack and install Yarn
+# 🧶 Enable Corepack and install Yarn
 ```
 corepack enable
 corepack prepare yarn@stable --activate
 ```
-# Verify installations
+# ✅ Verify installations
 ```
 node -v
 npm -v
 yarn -v
 ```
 
-## Step 4: (Optional) Install and Configure cuDNN for Nvidia GPU Support
+## 🧠 Step 4: (Optional) Install and Configure cuDNN for Nvidia GPU Support
 ```
 wget https://developer.download.nvidia.com/compute/cudnn/9.11.0/local_installers/cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
 sudo dpkg -i cudnn-local-repo-ubuntu2204-9.11.0_1.0-1_amd64.deb
@@ -119,13 +119,13 @@ echo "deb [signed-by=/usr/share/keyrings/cudnn-local-4EC753EA-keyring.gpg] file:
 sudo apt update
 sudo apt install -y libcudnn9 libcudnn9-dev
 ```
-# Add CUDA libraries to your path and reload
+# 🧩 Add CUDA libraries to your path and reload
 ```
 echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## Step 5: Install Poetry (Python Dependency Manager)
+## 📦 Step 5: Install Poetry (Python Dependency Manager)
 ```
 curl -sSL https://install.python-poetry.org | python3 -
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
@@ -133,13 +133,14 @@ source ~/.bashrc
 poetry --version
 ```
 
-## Step 6: Install psutil, readchar, and rich
+## 🧰 Step 6: Install psutil, readchar, and rich
 
 ```bash
 pip install psutil readchar rich
 ```
 
-## Step 7: Configure VcXsrv to Accept Connections from WSL
+## 🖥️ Step 7: Configure VcXsrv to Accept Connections from WSL
+
 **1.** Open CMD or PowerShell:
 ```bash
 ipconfig
@@ -190,7 +191,7 @@ export MESA_GL_VERSION_OVERRIDE=2.1
 export _JAVA_OPTIONS='-Xms512m -Xmx2g -Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true'
 ```
 
-## Step 8: Login to Gensyn Modal and Run BlockAssist
+## 🔐 Step 8: Login to Gensyn Modal and Run BlockAssist
 
 **1** First, go to the modal-login directory and start the login server:
 ```
@@ -207,7 +208,7 @@ cd
 cd blockassist
 ```
 
-## Step 9: Activate Environment & Install BlockAssist Locally (Malmo Fix) 🛠️
+## 🧩 Step 9: Activate Environment & Install BlockAssist Locally (Malmo Fix) 🛠️
 
 **1)** Activate the same venv
 ```
@@ -240,7 +241,10 @@ python3 run.py
 
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/main/Screenshot%202025-09-09%20232659.png)
 
+
 **6** And soon your Minecraft game will open in VcXsrv
+
+
 
 ## 🚀 How To Start BlockAssist the Next Day
 
