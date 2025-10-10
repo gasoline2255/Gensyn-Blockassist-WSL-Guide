@@ -237,14 +237,18 @@ PY
 python3 run.py
 ```
 
-**5** Now it will ask for Hugging Face token: `Paste your token`
+## Now it will ask for Hugging Face token: `Paste your token`
 
 ![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/main/Screenshot%202025-09-09%20232659.png)
 
 
-**6** And soon your Minecraft game will open in VcXsrv
+## And soon your Minecraft game will open in VcXsrv
 
+![image alt](https://github.com/gasoline2255/Gensyn-Blockassist-WSL-Guide/blob/main/Screenshot%202025-10-11%20014759.png)
 
+`1 Press Enter in the terminal again.`
+
+`2 Select your game screen, then press Enter again inside the screen.`
 
 ## 🚀 How To Start BlockAssist the Next Day
 
