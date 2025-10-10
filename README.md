@@ -1,4 +1,4 @@
-# 🎮 Gensyn Minecraft BlockAssist v0.1.0 on WSL ��️
+# 🎮 Gensyn Minecraft BlockAssist v0.1.0 on WSL 
 
 **BlockAssist v0.1.0 has been released with important fixes, including a HuggingFace update that all users need to apply.**
 
