@@ -263,7 +263,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - bash)"
 eval "$(pyenv virtualenv-init -)"
 ```
-##Launch VcXsrv on Windows with:
+# Launch VcXsrv on Windows with:
 ```bash
 ✅ Multi-window
 ✅ Start no client
