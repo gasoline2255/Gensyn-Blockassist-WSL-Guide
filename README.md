@@ -232,7 +232,13 @@ print('malmo' in [m.name for m in pkgutil.iter_modules()])
 PY
 ```
 
-**4** Now run BlockAssist:
+**4** Install Zip Utilities
+```
+sudo apt update
+sudo apt install -y zip unzip
+```
+
+**5** Now run BlockAssist:
 ```bash
 python3 run.py
 ```
